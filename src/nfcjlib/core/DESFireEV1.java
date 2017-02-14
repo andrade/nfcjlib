@@ -175,7 +175,7 @@ public class DESFireEV1 extends SimpleSCR {
 
 		this.ktype = type;
 		this.kno = keyNo;
-		this.iv = iv0;
+		this.iv = iv2; //???
 		this.skey = skey;
 
 		return skey;
@@ -1871,7 +1871,7 @@ public class DESFireEV1 extends SimpleSCR {
 		byte[] fullApdu = new byte[6 + payload.length];
 		fullApdu[0] = (byte) 0x90;
 		fullApdu[1] = cmd;
-		fullApdu[4] = -1;
+		fullApdu[4] = Byte.parseByte(Integer.toHexString(payload.length),16);
 		System.arraycopy(payload, 0, fullApdu, 5, payload.length);
 
 		fullApdu = preprocess(fullApdu, 7, cs);  // 7 = 1+3+3 (keyNo+off+len)
